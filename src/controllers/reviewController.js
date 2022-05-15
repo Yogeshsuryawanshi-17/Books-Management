@@ -39,15 +39,7 @@ const bookReview = async function (req, res) {
             return res.status(400).send({ status: false, message: "Reviewer's name is required" })
         }
 
-        // Validate reviewedAt
-        if (!validator.isValid(reviewedAt)) {
-            return res.status(400).send({ status: false, message: "reviewedAt is required" })
-        }
 
-        // Validation of reviewedAt
-        if (!validator.isValidDate(reviewedAt)) {
-            return res.status(400).send({ status: false, message: "Validation of reviewedAt is required" })
-        }
 
         // Validate rating
         if (!validator.isValid(rating)) {
@@ -75,6 +67,8 @@ const bookReview = async function (req, res) {
         if (searchBook.isDeleted === true) {
             return res.status(400).send({ status: false, message: "Book has been already deleted." })
         }
+
+
         body.bookId = searchBook._id;
         body["reviewedAt"] = new Date()
 
