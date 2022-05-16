@@ -81,7 +81,10 @@ const createUser = async (req, res) => {
     }
 
 
-
+    if (isValidObjectType(data.address)) {
+      return res.status(400).send({ status: false, message: "Enter address in a object with 'street','city' and 'pincode' as keys" })
+    }
+    
     // Cheking duplicate Entry Of User 
     let duplicateEntries = await userModel.find();
     let duplicateLength = duplicateEntries.length

@@ -59,7 +59,7 @@ const bookReview = async function (req, res) {
 
         let searchBook = await bookModel.findOneAndUpdate({ _id: params }, { $inc: { reviews: 1 } }, { new: true })
         if (!searchBook) {
-            return res.status(404).send({ status: false, message: `Book does not exist by this ${params}.` })
+            return res.status(404).send({ status: false, message: `Book Not Found by this ${params}.` })
         }
 
         //verifying the book is deleted or not
@@ -125,12 +125,12 @@ const updateReview = async function (req, res) {
 
         let book = await bookModel.findOne({ _id: bookId, isDeleted: false })
         if (!book) {
-            return res.status(404).send({ status: false, msg: "Book doesnot exist" })
+            return res.status(404).send({ status: false, msg: "Book not found" })
         }
 
         let reviewData = await reviewModel.findOne({ _id: reviewId, isDeleted: false })
         if (!reviewData) {
-            return res.status(404).send({ status: false, msg: "review doesnot exist" })
+            return res.status(404).send({ status: false, msg: "review not found" })
         }
 
 
@@ -206,7 +206,7 @@ const deleteReview = async function (req, res) {
 
         let book = await bookModel.findOne({ _id: bookId, isDeleted: false })
         if (!book) {
-            return res.status(404).send({ status: false, msg: "Book doesnot exist" })
+            return res.status(404).send({ status: false, msg: "Book not found" })
         }
 
         let deletedReview = await reviewModel.findOneAndUpdate({ _id: reviewId, isDeleted: false }, { isDeleted: true })
@@ -217,7 +217,7 @@ const deleteReview = async function (req, res) {
             return res.status(200).send({ status: true, msg: "Review is deleted successfully" })
         }
         else {
-            return res.status(400).send({ status: false, msg: "Review not exist" })
+            return res.status(404).send({ status: false, msg: "Review not exist" })
         }
     }
     catch (err) {

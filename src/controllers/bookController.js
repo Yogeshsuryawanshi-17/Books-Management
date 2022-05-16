@@ -117,7 +117,7 @@ const createBook = async function (req, res) {
 
     let user = await userModel.findById(userId);
     if (!user) {
-      return res.status(400).send({ status: false, msg: "UserId not found" })
+      return res.status(404).send({ status: false, msg: "UserId not found" })
     }
 
 
@@ -241,10 +241,6 @@ const getBookWithReview = async function (req, res) {
     }
 
 
-    // if (Object.keys(_id).length === 0) {
-    //   return res.status(400).send({ status: false, msg: "Invalid request" });
-    // }
-
 
     // Book Details with Book Id
     let bookDetails = await bookModel.findOne({ _id, isDeleted: false });
@@ -359,7 +355,7 @@ const deleteBook = async function (req, res) {
 
     let data = await bookModel.findById(bookId)
     if (data.isDeleted == true) {
-      return res.status(404).send({ status: false, msg: "This book is already deleted" })
+      return res.status(404).send({ status: false, msg: "Not Found(This book is already deleted)" })
     }
 
     if (data.isDeleted == false) {

@@ -60,11 +60,6 @@ const isValidObjectId = (objectId) => {
 };
 
 
-// const isValidDate = (date) => {
-//   const specificDate = new Date(date).setHours(0, 0, 0, 0);
-//   const today = new Date().setHours(0, 0, 0, 0);
-//   return specificDate < today;
-// }
 
 const isValidDate = (date) => {
   if (/((18|19|20)[0-9]{2}[\-.](0[13578]|1[02])[\-.](0[1-9]|[12][0-9]|3[01]))|(18|19|20)[0-9]{2}[\-.](0[469]|11)[\-.](0[1-9]|[12][0-9]|30)|(18|19|20)[0-9]{2}[\-.](02)[\-.](0[1-9]|1[0-9]|2[0-8])|(((18|19|20)(04|08|[2468][048]|[13579][26]))|2000)[\-.](02)[\-.]29/.test(date)) {
@@ -82,5 +77,12 @@ const isValidateISBN = function (value) {
   return true
 };
 
+const isValidObjectType = (value) => {
+  if (typeof value === 'object' && Object.keys(value).length > 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
-module.exports = { isValid, isValidBody, validTitle, validString, validMobileNum, validEmail, validPwd, isValidObjectId, isValidDate, isValidateISBN };
+module.exports = { isValidObjectType, isValid, isValidBody, validTitle, validString, validMobileNum, validEmail, validPwd, isValidObjectId, isValidDate, isValidateISBN };
